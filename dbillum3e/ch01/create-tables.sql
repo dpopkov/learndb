@@ -1,17 +1,17 @@
-CREATE TABLE University (
+CREATE TABLE Student (
     stuId char(5) primary key,
     lastName varchar(64),
     firstName varchar(64),
     major varchar(64),
     credits int
 );
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1001', 'Smith', 'Tom', 'History', 90);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1002', 'Chin', 'Ann', 'Math', 36);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1005', 'Lee', 'Perry', 'History', 3);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1010', 'Burns', 'Edward', 'Art', 63);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1013', 'McCarthy', 'Owen', 'Math', 0);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1015', 'Jones', 'Mary', 'Math', 42);
-INSERT INTO University (stuId, lastName, firstName, major, credits) VALUES ('S1020', 'Rivera', 'Jane', 'CSC', 15);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1001', 'Smith', 'Tom', 'History', 90);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1002', 'Chin', 'Ann', 'Math', 36);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1005', 'Lee', 'Perry', 'History', 3);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1010', 'Burns', 'Edward', 'Art', 63);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1013', 'McCarthy', 'Owen', 'Math', 0);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1015', 'Jones', 'Mary', 'Math', 42);
+INSERT INTO Student (stuId, lastName, firstName, major, credits) VALUES ('S1020', 'Rivera', 'Jane', 'CSC', 15);
 CREATE TABLE Faculty (
     facId char(4) primary key,
     name varchar(64),
