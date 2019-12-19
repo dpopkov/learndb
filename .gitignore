@@ -1,1 +1,9 @@
 .~*.ods#
+
+# Idea files
+/**/.idea/
+*.iml
+
+# Java target
+/**/target/
+
