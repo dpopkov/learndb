@@ -1,4 +1,7 @@
+# Temporary files
 .~*.ods#
+*.swp
+/**/Tmp*.java
 
 # Idea files
 /**/.idea/
@@ -7,3 +10,5 @@
 # Java target
 /**/target/
 
+# Application properties file
+connection.properties
