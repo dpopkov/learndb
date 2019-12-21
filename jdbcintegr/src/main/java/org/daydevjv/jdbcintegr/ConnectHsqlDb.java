@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class ConnectHsqlDb {
     public static void main(String[] args) {
-        AppProperties app = new AppProperties("/connection.hsqldb.properties");
+        ConnectionProperties app = new ConnectionProperties("/connection.hsqldb.properties");
         try (Connection conn = DriverManager.getConnection(app.getUrl(), app.getUser(), app.getPassword())) {
             System.out.println("Connected: " + conn);
         } catch (SQLException e) {

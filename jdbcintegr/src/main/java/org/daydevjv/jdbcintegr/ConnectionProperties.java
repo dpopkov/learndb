@@ -5,13 +5,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Represents properties of application.<br>
+ * Represents properties of connection.<br>
  */
-public class AppProperties {
+public class ConnectionProperties {
     private final Properties props = new Properties();
 
-    public AppProperties(String resourceFileName) {
-        try (InputStream in = AppProperties.class.getResourceAsStream(resourceFileName)) {
+    public ConnectionProperties(String resourceFileName) {
+        try (InputStream in = ConnectionProperties.class.getResourceAsStream(resourceFileName)) {
             props.load(in);
         } catch (IOException e) {
             throw new IllegalArgumentException("Cannot load from resource: " + resourceFileName, e);
