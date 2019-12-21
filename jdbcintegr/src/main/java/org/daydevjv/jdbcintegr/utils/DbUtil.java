@@ -1,4 +1,4 @@
-package org.daydevjv.jdbcintegr;
+package org.daydevjv.jdbcintegr.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

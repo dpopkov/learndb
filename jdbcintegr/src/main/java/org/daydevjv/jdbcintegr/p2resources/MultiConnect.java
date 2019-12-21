@@ -1,4 +1,7 @@
-package org.daydevjv.jdbcintegr;
+package org.daydevjv.jdbcintegr.p2resources;
+
+import org.daydevjv.jdbcintegr.utils.DbType;
+import org.daydevjv.jdbcintegr.utils.DbUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

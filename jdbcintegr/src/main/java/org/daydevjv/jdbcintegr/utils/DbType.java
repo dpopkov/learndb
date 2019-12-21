@@ -1,4 +1,4 @@
-package org.daydevjv.jdbcintegr;
+package org.daydevjv.jdbcintegr.utils;
 
 public enum DbType {
     HSQLDB,

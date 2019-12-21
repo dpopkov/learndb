@@ -1,4 +1,4 @@
-package org.daydevjv.jdbcintegr;
+package org.daydevjv.jdbcintegr.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

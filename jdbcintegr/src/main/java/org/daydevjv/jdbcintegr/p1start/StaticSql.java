@@ -1,4 +1,6 @@
-package org.daydevjv.jdbcintegr;
+package org.daydevjv.jdbcintegr.p1start;
+
+import org.daydevjv.jdbcintegr.utils.ConnectionProperties;
 
 import java.sql.*;
 
