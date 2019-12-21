@@ -5,16 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Example of connection to MySQL.
+ * Example of connection to hsqldb.
  *
  * Uses resource file containing key-value pairs:
- * user=______
- * password=_______
- * url=jdbc:mysql://localhost/explorecalifornia?useSSL=false
+ * user=hsqluser
+ * password=hsqlpassword
+ * url=jdbc:hsqldb:data/explorecalifornia
  */
-public class ConnectMySql {
+public class ConnectHsqlDb {
     public static void main(String[] args) {
-        AppProperties app = new AppProperties("/connection.mysql.properties");
+        AppProperties app = new AppProperties("/connection.hsqldb.properties");
         try (Connection conn = DriverManager.getConnection(app.getUrl(), app.getUser(), app.getPassword())) {
             System.out.println("Connected: " + conn);
         } catch (SQLException e) {

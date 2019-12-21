@@ -6,11 +6,6 @@ import java.util.Properties;
 
 /**
  * Represents properties of application.<br>
- *
- * Uses resource file containing key-value pairs:
- * user=______
- * password=_______
- * url=jdbc:mysql://localhost/explorecalifornia?useSSL=false
  */
 public class AppProperties {
     private final Properties props = new Properties();
