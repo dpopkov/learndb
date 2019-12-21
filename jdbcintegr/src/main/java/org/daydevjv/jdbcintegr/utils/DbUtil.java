@@ -5,22 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbUtil {
-
-    public static final String MYSQL_RESOURCE_NAME = "/connection.mysql.properties";
-    public static final String HSQLDB_RESOURCE_NAME = "/connection.hsqldb.properties";
-
     public static Connection getConnection(DbType dbType) throws SQLException {
-        ConnectionProperties app;
-        switch (dbType) {
-            case MYSQL:
-                app = new ConnectionProperties(MYSQL_RESOURCE_NAME);
-                break;
-            case HSQLDB:
-                app = new ConnectionProperties(HSQLDB_RESOURCE_NAME);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + dbType);
-        }
+        ConnectionProperties app = new ConnectionProperties(dbType.getPropertiesName());
         return DriverManager.getConnection(app.getUrl(), app.getUser(), app.getPassword());
+    }
+
+    /** Outputs detailed information about SQLException. */
+    public static void processException(SQLException e) {
+        System.err.println("Error message: " + e.getMessage());
+        System.err.println("Error code: " + e.getErrorCode());
+        System.err.println("SQL state: " + e.getSQLState());
     }
 }

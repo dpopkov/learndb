@@ -38,3 +38,11 @@ these interfaces:
 
 * Connection, ResultSet
 * Statement, PreparedStatement, CallableStatement
+
+Methods added in SQLException
+-----------------------------
+
+* getErrorCode(): vendor-specific exception code as integer
+* getSQLState(): vendor-specific exception code as 5-character string
+* getNextException(), setNextException(), iterator(): tools for navigating chains
+of multiple exceptions
