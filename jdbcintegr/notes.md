@@ -63,10 +63,29 @@ while (resultSet.next()) {
 }
 ``` 
 
-
 Using scrollable ResultSet
 --------------------------
 
+By default result sets are forward only.
+* ResultSet can be made scrollable with most databases 
+* select scrolling when creating the Statement object:
+```java
+Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+```
+__For maximum portability be explicit with your ResultSet options.__  
+
+Moving the cursor:
+* methods that move the cursor to specific rows
+    - rs.beforeFirst();
+    - rs.first();
+    - rs.last();
+    - rs.afterLast();
+    - rs.absolute(int row);
+* boolean methods that check the cursor position
+    - rs.isBeforeFirst();
+    - rs.isFirst();
+    - rs.isLast();
+    - rs.isAfterLast();
 
 Limit row
 ---------
