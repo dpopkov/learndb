@@ -46,3 +46,36 @@ Methods added in SQLException
 * getSQLState(): vendor-specific exception code as 5-character string
 * getNextException(), setNextException(), iterator(): tools for navigating chains
 of multiple exceptions
+
+Using the ResultSet cursor
+--------------------------
+
+ResultSet encapsulates data returned from the database server. 
+
+* each instance of ResultSet has a cursor - an in-memory pointer that goes from row to row
+* the starting cursor position is __before__ the first row of data
+* the most common operation is to move forward from row to row
+```java
+ResultSet resultSet = stmt.executeQuery("SELECT * FROM tablename");
+while (resultSet.next()) {
+    String columnValue = resultSet.getString("columnName");
+    System.out.println(columnValue);
+}
+``` 
+
+
+Using scrollable ResultSet
+--------------------------
+
+
+Limit row
+---------
+
+
+Prepared Statements
+-------------------
+
+
+Stored Procedures
+-----------------
+
