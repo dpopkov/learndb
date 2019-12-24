@@ -6,8 +6,8 @@ public enum DbType {
 
     private final String propertiesName;
 
-    DbType(String dbName) {
-        this.propertiesName = "/connection." + dbName + ".properties";
+    DbType(String rdbmsName) {
+        this.propertiesName = "/connection." + rdbmsName + ".properties";
     }
 
     public String getPropertiesName() {

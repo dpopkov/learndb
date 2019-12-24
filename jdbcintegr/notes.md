@@ -89,10 +89,20 @@ Moving the cursor:
 
 Limit row
 ---------
+Do not used setMaxRows(int) method of Statement.  
+Use static SQL:
+```sql
+SELECT * FROM table-name LIMIT offset-rows, num-rows;
+```
 
 
 Prepared Statements
 -------------------
+```java
+PreparedStatement stmt = conn.prepareStatement(SQL);
+stmt.setDouble(1, doubleValue);
+ResultSet rs = stmt.executeQuery();
+```
 
 
 Stored Procedures
