@@ -107,4 +107,18 @@ ResultSet rs = stmt.executeQuery();
 
 Stored Procedures
 -----------------
-
+```java
+final String SQL = "{call GetToursByPrice(?)}";
+CallableStatement stmt = conn.prepareCall(SQL);
+stmt.setDouble(1, maxPrice);
+ResultSet rs = stmt.executeQuery();
+```
+With __out__ parameter:
+```java
+final String SQL = "{call GetToursWithCountByPrice(?, ?)}";
+CallableStatement stmt = conn.prepareCall(SQL);
+stmt.setDouble(1, maxPrice);
+stmt.registerOutParameter("total", Types.INTEGER);
+ResultSet rs = stmt.executeQuery();
+int nRows = stmt.getInt("total");
+```
