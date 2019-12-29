@@ -131,3 +131,12 @@ int tourId      = rs.getObject("tourId", Integer.class);
 String tourName = rs.getObject("tourName", String.class);
 double price    = rs.getObject("price", Double.class);
 ```
+
+
+Java Beans
+----------
+
+Java Bean class has a name, it has private properties to represent its values,
+and public setter and getter methods, that allow the rest of the application to
+access and modify those values.  
+True Java Bean is supposed to be serializable.

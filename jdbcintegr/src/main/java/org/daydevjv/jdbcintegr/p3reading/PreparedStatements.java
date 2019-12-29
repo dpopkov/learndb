@@ -1,6 +1,6 @@
 package org.daydevjv.jdbcintegr.p3reading;
 
-import org.daydevjv.jdbcintegr.tables.Tours;
+import org.daydevjv.jdbcintegr.tables.ToursManager;
 import org.daydevjv.jdbcintegr.utils.DbType;
 import org.daydevjv.jdbcintegr.utils.DbUtil;
 import org.daydevjv.jdbcintegr.utils.InputHelper;
@@ -17,7 +17,7 @@ public class PreparedStatements {
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.setDouble(1, maxPrice);
             ResultSet rs = stmt.executeQuery();
-            Tours.displayData(rs);
+            ToursManager.displayData(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }

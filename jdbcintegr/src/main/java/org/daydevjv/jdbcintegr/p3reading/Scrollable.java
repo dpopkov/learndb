@@ -1,6 +1,6 @@
 package org.daydevjv.jdbcintegr.p3reading;
 
-import org.daydevjv.jdbcintegr.tables.States;
+import org.daydevjv.jdbcintegr.tables.StatesManager;
 import org.daydevjv.jdbcintegr.utils.DbType;
 import org.daydevjv.jdbcintegr.utils.DbUtil;
 
@@ -14,7 +14,7 @@ public class Scrollable {
         try (Connection conn = DbUtil.getConnection(DbType.HSQLDB)) {
             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery("SELECT stateId, stateName FROM states");
-            States.displayData(rs);
+            StatesManager.displayData(rs);
             rs.last();
             System.out.println("Number of rows: " + rs.getRow());
             rs.first();

@@ -1,6 +1,6 @@
 package org.daydevjv.jdbcintegr.p3reading;
 
-import org.daydevjv.jdbcintegr.tables.Tours;
+import org.daydevjv.jdbcintegr.tables.ToursManager;
 import org.daydevjv.jdbcintegr.utils.DbType;
 import org.daydevjv.jdbcintegr.utils.DbUtil;
 
@@ -16,7 +16,7 @@ public class LimitRows {
             /* Do not use setMaxRows method. */
             /* stmt.setMaxRows(5); */
             ResultSet rs = stmt.executeQuery("SELECT tourId, tourName, price FROM tours LIMIT 10, 5");
-            Tours.displayData(rs);
+            ToursManager.displayData(rs);
         }
     }
 }

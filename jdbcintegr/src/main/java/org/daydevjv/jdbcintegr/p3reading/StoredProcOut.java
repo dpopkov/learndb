@@ -1,6 +1,6 @@
 package org.daydevjv.jdbcintegr.p3reading;
 
-import org.daydevjv.jdbcintegr.tables.Tours;
+import org.daydevjv.jdbcintegr.tables.ToursManager;
 import org.daydevjv.jdbcintegr.utils.DbType;
 import org.daydevjv.jdbcintegr.utils.DbUtil;
 import org.daydevjv.jdbcintegr.utils.InputHelper;
@@ -19,7 +19,7 @@ public class StoredProcOut {
             stmt.registerOutParameter("total", Types.INTEGER);
             ResultSet rs = stmt.executeQuery();
             int nRows = stmt.getInt("total");
-            Tours.displayData(rs, nRows);
+            ToursManager.displayData(rs, nRows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
