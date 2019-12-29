@@ -122,3 +122,12 @@ stmt.registerOutParameter("total", Types.INTEGER);
 ResultSet rs = stmt.executeQuery();
 int nRows = stmt.getInt("total");
 ```
+
+
+Generic Getters
+---------------
+```java
+int tourId      = rs.getObject("tourId", Integer.class);
+String tourName = rs.getObject("tourName", String.class);
+double price    = rs.getObject("price", Double.class);
+```

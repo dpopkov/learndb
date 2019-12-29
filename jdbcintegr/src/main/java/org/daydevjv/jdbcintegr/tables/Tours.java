@@ -20,12 +20,10 @@ public class Tours {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         System.out.println("Number of tours: " + nRows);
         while (rs.next()) {
-            StringBuilder builder = new StringBuilder();
-            builder.append("Tour ").append(rs.getInt("tourId")).append(": ");
-            builder.append(rs.getString("tourName"));
-            double price = rs.getDouble("price");
-            builder.append(" (").append(nf.format(price)).append(")");
-            System.out.println(builder);
+            int tourId      = rs.getObject("tourId", Integer.class);
+            String tourName = rs.getObject("tourName", String.class);
+            double price    = rs.getObject("price", Double.class);
+            System.out.println("Tour " + tourId + ": " + tourName + " (" + nf.format(price) + ")");
         }
     }
 }
