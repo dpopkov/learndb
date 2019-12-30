@@ -9,4 +9,9 @@ public class InputHelper {
         System.out.print(prompt);
         return scanner.nextDouble();
     }
+
+    public static int getInt(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextInt();
+    }
 }
