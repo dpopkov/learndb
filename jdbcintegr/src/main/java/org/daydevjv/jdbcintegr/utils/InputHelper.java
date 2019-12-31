@@ -14,4 +14,9 @@ public class InputHelper {
         System.out.print(prompt);
         return scanner.nextInt();
     }
+
+    public static String getString(String prompt) {
+        System.out.print(prompt);
+        return scanner.next();
+    }
 }

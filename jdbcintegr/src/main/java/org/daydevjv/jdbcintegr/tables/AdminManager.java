@@ -28,13 +28,47 @@ public class AdminManager {
             stmt.setInt(1, adminId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Admin admin = new Admin();
-                admin.setAdminId(adminId);
-                admin.setUserName(rs.getString("userName"));
-                admin.setPassword(rs.getString("password"));
-                return admin;
+                Admin bean = new Admin();
+                bean.setAdminId(adminId);
+                bean.setUserName(rs.getString("userName"));
+                bean.setPassword(rs.getString("password"));
+                return bean;
             }
         }
         return null;
+    }
+
+    public static boolean insert(Admin bean) throws SQLException {
+        String sql = "INSERT into admin (userName, password) VALUES (?, ?)";
+        try (Connection conn = DbUtil.getConnection(DbType.MYSQL)) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, bean.getUserName());
+            stmt.setString(2, bean.getPassword());
+            int affected = stmt.executeUpdate();
+            if (affected == 1) {
+                ResultSet keys = stmt.getGeneratedKeys();
+                if (keys.next()) {
+                    int newKey = keys.getInt(1);
+                    bean.setAdminId(newKey);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean update(Admin bean) throws SQLException {
+        String sql = "UPDATE admin SET userName = ?, password = ? WHERE adminId = ?";
+        try (Connection conn = DbUtil.getConnection(DbType.MYSQL)) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, bean.getUserName());
+            stmt.setString(2, bean.getPassword());
+            stmt.setInt(3, bean.getAdminId());
+            int affected = stmt.executeUpdate();
+            if (affected == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }
