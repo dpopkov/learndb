@@ -205,3 +205,21 @@ if (rs.next()) {
     return true;
 }
 ```
+
+
+Connection Management
+---------------------
+
+You should minimize opening and closing Connections by reusing Connections.
+```java
+try {
+    ConnectionManager.getInstance().setDbType(DbType.MYSQL);
+    AdminManager manager = new AdminManager(ConnectionManager.getInstance().getConnection());
+    manager.displayAllRows();
+    // other crud operations 
+    // ...
+    manager.displayAllRows();
+} finally {
+    ConnectionManager.getInstance().close();
+}
+```
