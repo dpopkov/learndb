@@ -71,4 +71,34 @@ public class AdminManager {
         }
         return false;
     }
+
+    public static boolean updateRS(Admin bean) throws SQLException {
+        String sql = "SELECT * FROM admin WHERE adminId = ?";
+        try (Connection conn = DbUtil.getConnection(DbType.MYSQL)) {
+            PreparedStatement stmt = conn.prepareStatement(sql,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setInt(1, bean.getAdminId());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                rs.updateString("userName", bean.getUserName());
+                rs.updateString("password", bean.getPassword());
+                rs.updateRow();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean delete(int adminId) throws SQLException {
+        String sql = "DELETE FROM admin WHERE adminId = ?";
+        try (Connection conn = DbUtil.getConnection(DbType.MYSQL)) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, adminId);
+            int deleted = stmt.executeUpdate();
+            if (deleted == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

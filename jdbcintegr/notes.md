@@ -174,3 +174,34 @@ if (affected == 1) {
     return true;
 }
 ```
+
+
+Delete SQL
+----------
+```java
+String sql = "DELETE FROM admin WHERE adminId = ?";
+PreparedStatement stmt = conn.prepareStatement(sql);
+stmt.setInt(1, adminId);
+int deleted = stmt.executeUpdate();
+if (deleted == 1) {
+    return true;
+}
+```
+
+
+Updatable ResultSet
+-------------------
+The result set should contain __primary key__.
+```java
+String sql = "SELECT * FROM admin WHERE adminId = ?";
+PreparedStatement stmt = conn.prepareStatement(sql,
+        ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+stmt.setInt(1, bean.getAdminId());
+ResultSet rs = stmt.executeQuery();
+if (rs.next()) {
+    rs.updateString("userName", bean.getUserName());
+    rs.updateString("password", bean.getPassword());
+    rs.updateRow();
+    return true;
+}
+```
