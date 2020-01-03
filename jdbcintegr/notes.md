@@ -236,3 +236,30 @@ conn.setAutoCommit(false);
 // some operations ...
 conn.commit(); // OR conn.rollback();
 ```
+
+
+Using Metadata
+--------------
+
+### Receive tables in database
+```java
+DatabaseMetaData metaData = conn.getMetaData();
+final String[] tableTypes = {"TABLE"};
+ResultSet rsTables = metaData.getTables(null, "%", "%", tableTypes);
+// Parameter 'catalog' = null - it is name of the database and is already selected in the connection string
+// Parameters 'schemaPattern' and 'tableNamePattern' are set as wildcard '%'
+while (rsTables.next()) {
+    System.out.println(rsTables.getString("TABLE_NAME"));
+}
+```
+
+### Receive names and data types of the database columns
+```java
+for (String tableName : tables) {
+    ResultSet rsColumns = metaData.getColumns(null, "%", tableName, "%");
+    while (rsColumns.next()) {
+        String columnName = rsColumns.getString("COLUMN_NAME");
+        String typeName = rsColumns.getString("TYPE_NAME");
+    }
+}
+```
