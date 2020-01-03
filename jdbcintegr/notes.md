@@ -223,3 +223,16 @@ try {
     ConnectionManager.getInstance().close();
 }
 ```
+
+
+Transactions
+------------
+
+In JDBC transactions are auto-committed by default (if not `setAutoCommit(false);`). 
+MySQL's InnoDB storage engine supports transactions. MyISAM does not.
+```java
+Connection conn = connMgr.getConnection();
+conn.setAutoCommit(false);
+// some operations ...
+conn.commit(); // OR conn.rollback();
+```

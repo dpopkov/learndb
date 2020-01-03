@@ -4,26 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionManager {
+public class ConnectionManager implements AutoCloseable {
     private static ConnectionManager instance = null;
-
-    private DbType dbType = DbType.MYSQL;
-    private ConnectionProperties connProps = readProperties();
-
-    private ConnectionProperties readProperties() {
-        return new ConnectionProperties(dbType.getPropertiesName());
-    }
-
-    private Connection conn = null;
-
-    private ConnectionManager() {
-    }
 
     public static ConnectionManager getInstance() {
         if (instance == null) {
             instance = new ConnectionManager();
         }
         return instance;
+    }
+
+    private DbType dbType = DbType.MYSQL;
+    private ConnectionProperties connProps = readProperties();
+    private Connection conn = null;
+
+    private ConnectionManager() {
+    }
+
+    private ConnectionProperties readProperties() {
+        return new ConnectionProperties(dbType.getPropertiesName());
     }
 
     public void setDbType(DbType dbType) {
@@ -33,16 +32,6 @@ public class ConnectionManager {
 
     public DbType getDbType() {
         return dbType;
-    }
-
-    private boolean openConnection() {
-        try {
-            conn = DriverManager.getConnection(connProps.getUrl(), connProps.getUser(), connProps.getPassword());
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     public Connection getConnection() {
@@ -58,6 +47,17 @@ public class ConnectionManager {
         return conn;
     }
 
+    private boolean openConnection() {
+        try {
+            conn = DriverManager.getConnection(connProps.getUrl(), connProps.getUser(), connProps.getPassword());
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public void close() {
         System.out.println("Closing connection");
         try {

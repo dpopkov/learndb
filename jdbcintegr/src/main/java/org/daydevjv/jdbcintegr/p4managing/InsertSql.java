@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 public class InsertSql {
     public static void main(String[] args) throws SQLException {
-        try {
-            AdminManager manager = new AdminManager(ConnectionManager.getInstance().getConnection());
+        try (ConnectionManager connMgr = ConnectionManager.getInstance()) {
+            AdminManager manager = new AdminManager(connMgr.getConnection());
             manager.displayAllRows();
             Admin bean = new Admin();
             bean.setUserName(InputHelper.getString("User name: "));
@@ -22,8 +22,6 @@ public class InsertSql {
                 System.err.println("Failed to insert.");
             }
             manager.displayAllRows();
-        } finally {
-            ConnectionManager.getInstance().close();
         }
     }
 }
