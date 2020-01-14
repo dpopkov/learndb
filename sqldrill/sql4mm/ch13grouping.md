@@ -69,4 +69,28 @@ Show me the unique city names from the customers table.
 SELECT custcity FROM customers GROUP BY custcity;
 ```
 
+Culumn Restrictions
+-------------------
+
+Display the customer ID, customer full name, and the total of all engagement contract prices.
+```sql
+SELECT customerid, custfirstname || ' ' || custlastname, sum(contractprice)
+FROM customers 
+JOIN engagements USING (customerid)
+GROUP BY customerid, custfirstname, custlastname;
+```
+
+Grouping on Expressions
+-----------------------
+
+Show me for each customer in the state of Washington the customer
+full name, the customer full address, the latest contract date for the
+customer, and the total price of all the contracts.
+```sql
+SELECT custfirstname || ' ' || custlastname, custstreetaddress || ', ' || custcity , max(startdate), sum(contractprice)
+FROM customers JOIN engagements USING (customerid)
+WHERE custstate = 'WA'
+GROUP BY custfirstname, custlastname, custstreetaddress, custcity;
+```
+
 
