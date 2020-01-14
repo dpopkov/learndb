@@ -163,3 +163,43 @@ FROM product INNER JOIN laptop ON product.model = laptop.model
 GROUP BY maker;
 ```
 
+Задание: 20  
+Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+```sql
+SELECT maker, count(type)
+FROM product WHERE type = 'PC'
+GROUP BY maker
+HAVING count(type) >= 3;
+```
+
+Задание: 21  
+Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC. Вывести: maker, максимальная цена.
+```sql
+SELECT maker, max(price)
+FROM product JOIN pc ON product.model = pc.model
+GROUP BY maker;
+```
+
+Задание: 22  
+Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
+```sql
+SELECT speed, avg(price)
+FROM pc
+WHERE speed > 600
+GROUP BY speed;
+```
+
+Задание: 23  
+Найдите производителей, которые производили бы как ПК со скоростью не менее 750 МГц, так и ПК-блокноты со скоростью не менее 750 МГц.
+Вывести: Maker
+```sql
+SELECT maker
+FROM pc JOIN product p ON pc.model = p.model
+WHERE speed >= 750
+INTERSECT
+SELECT maker
+FROM laptop la JOIN product p ON la.model = p.model
+WHERE speed >= 750;
+```
+
+
