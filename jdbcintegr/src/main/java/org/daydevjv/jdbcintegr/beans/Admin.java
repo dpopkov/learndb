@@ -32,7 +32,7 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin{adminId=" + adminId + ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' + '}';
+        return "Admin{adminId=" + adminId + ", userName='" + userName + '\''
+                + ", password='" + password + '\'' + '}';
     }
 }
