@@ -182,3 +182,128 @@ GROUP BY ingredientclassdescription
 ORDER BY ingredientclassdescription;
 ```
 
+
+Problems to solve
+-----------------
+
+### Sales Orders Database
+
+1 - Show me each vendor and the average by vendor of the number of days to deliver products.
+```sql
+SELECT vendname, avg(daystodeliver) AS AvgDaysDeliver
+FROM vendors JOIN product_vendors USING (vendorid)
+GROUP BY vendorid, vendname;
+```
+
+2 - Display for each product the product name and the total sales.
+```sql
+SELECT productname, sum(quotedprice * quantityordered) AS TotalSales
+FROM products JOIN order_details USING (productnumber)
+GROUP BY productnumber, productname;
+```
+
+3 - List all vendors and the count of products sold by each.
+```sql
+SELECT vendname, count(productnumber) AS CountOfProduct
+FROM vendors JOIN product_vendors USING (vendorid)
+GROUP BY vendorid, vendname;
+```
+
+4 - Challenge: Now solve problem 3 by using a subquery.
+```sql
+SELECT vendname, (
+	SELECT count(*) FROM product_vendors AS pv
+	WHERE pv.vendorid = vendors.vendorid
+) AS CountOfProduct
+FROM vendors;
+```
+
+### Entertainment Agency Database
+
+1 - Show each agent's name, the sum of the contract price for the engagements booked, and the agent's total commission.
+```sql
+SELECT agtfirstname, agtlastname, sum(contractprice) AS TotalContracts, (sum(contractprice) * commissionrate) AS TotalCommission
+FROM agents
+JOIN engagements USING (agentid)
+GROUP BY agentid;	-- agtfirstname, agtlastname, commissionrate
+```
+
+### School Scheduling Database
+
+1 - Display by category the category name and the count of classes offered.
+```sql
+SELECT categorydescription, count(classid)
+FROM categories
+JOIN subjects USING (categoryid)
+JOIN classes USING (subjectid)
+GROUP BY categoryid;	-- categorydescription
+```
+
+2 - List each staff member and the count of classes each is scheduled to teach.
+```sql
+SELECT stffirstname, stflastname, count(classid)
+FROM staff
+JOIN faculty_classes USING (staffid)
+GROUP BY staffid; 	-- stffirstname, stflastname
+```
+
+3 - Challenge: Now solve problem 2 by using a subquery.
+```sql
+SELECT s.stffirstname, s.stflastname, (
+SELECT count(*) FROM faculty_classes AS fc
+WHERE fc.staffid = s.staffid
+) AS ClassCount
+FROM staff AS s
+WHERE (
+SELECT count(*) FROM faculty_classes AS fc
+WHERE fc.staffid = s.staffid
+) <> 0
+ORDER BY s.stffirstname, s.stflastname;
+```
+
+### Bowling League Database
+
+1 - Display for each bowler the bowler name and the average of the bowler's raw game scores.
+```sql
+SELECT bowlerfirstname, bowlerlastname, avg(rawscore) AS AvgRawScore
+FROM bowlers
+JOIN bowler_scores USING (bowlerid)
+GROUP BY bowlerid;	-- bowlerfirstname, bowlerlastname
+```
+
+### Recipes Database
+
+1 - If I want to cook all the recipes in my cookbook, how much of each ingredient must I ahve on hand?
+```sql
+SELECT ingredientname, sum(amount) AS TotalAmount, measurementdescription
+FROM ingredients
+JOIN recipe_ingredients AS ri USING (ingredientid)
+JOIN recipes USING (recipeid)
+JOIN measurements AS m ON m.measureamountid = ri.measureamountid
+GROUP BY ingredientid, measurementdescription
+ORDER BY ingredientname;
+```
+
+2 - List all meat ingredients and the count of recipes that tincldue each one.
+```sql
+SELECT ingredientname, count(recipeid)
+FROM ingredients
+JOIN recipe_ingredients USING (ingredientid)
+JOIN ingredient_classes USING (ingredientclassid)
+WHERE ingredientclassdescription = 'Meat'
+GROUP BY ingredientname;
+```
+
+3 - Challenge: Now solve problem 2 by using a subquery.
+```sql
+SELECT i.ingredientname, (
+	SELECT count(recipeid) FROM recipe_ingredients AS ri
+	WHERE ri.ingredientid = i.ingredientid
+) AS IngCount
+FROM ingredients AS i
+WHERE ingredientclassid = (
+	SELECT ingredientclassid FROM ingredient_classes
+	WHERE ingredientclassdescription = 'Meat'
+) ORDER BY IngCount DESC;
+```
+
