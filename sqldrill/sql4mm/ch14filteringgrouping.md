@@ -148,3 +148,37 @@ GROUP BY recipetitle
 HAVING count(*) = 2;
 ```
 
+
+Problems for You to Solve
+-------------------------
+
+### Sales Orders Database
+
+1 - Show me each vendor and the average by vendor of the number of days to deliver products that are greater than the average delivery days for all vendors.
+```sql
+SELECT vendname, avg(daystodeliver)
+FROM vendors
+JOIN product_vendors USING (vendorid)
+GROUP BY vendname
+HAVING avg(daystodeliver) > (
+	SELECT avg(daystodeliver) FROM product_vendors
+);
+```
+
+2 - Display for each product the product name and the total sales that is greater than the average of sales for all products in that category.
+```sql
+SELECT productname, sum(od1.quotedprice * od1.quantityordered) AS TotalSales
+FROM products AS p1
+JOIN order_details AS od1 USING (productnumber)
+GROUP BY categoryid, productname
+HAVING sum(od1.quotedprice * od1.quantityordered) > (
+	SELECT avg(SumCategory) FROM	(
+		SELECT p2.categoryid, sum(od2.quotedprice * od2.quantityordered) AS SumCategory
+		FROM order_details AS od2
+		JOIN products AS p2 USING (productnumber)
+		GROUP BY p2.categoryid, p2.productnumber
+	) AS sc
+	WHERE sc.categoryid = p1.categoryid
+);
+```
+
