@@ -29,7 +29,7 @@
       <artifactId>mysql-connector-java</artifactId>
       <!--<version>8.0.18</version>-->  <!-- This version throws SQLException when connecting -->
       <!--<version>6.0.6</version>-->   <!-- This version throws SQLException when connecting -->
-      <version>5.1.48</version> <!-- Connects without exception -->
+      <version>8.0.28</version> <!-- Connects without exception -->
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
     <dependency>
